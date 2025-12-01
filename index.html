@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Verification Page</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        color: white;
+        flex-direction: column;
+    }
+
+    /* Glowing animated text */
+    .glow-text {
+        font-size: 3em;
+        color: #00ffff;
+        text-align: center;
+        animation: float 2s ease-in-out infinite;
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+        margin-bottom: 20px;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    /* Container styling */
+    .verification-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: rgba(0,0,0,0.7);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        width: 350px;
+        max-width: 90%;
+    }
+
+    /* Message styles */
+    .message {
+        margin: 15px 0;
+        font-size: 1.2em;
+        color: #ccc;
+        text-align: center;
+    }
+
+    /* Button styles */
+    .button {
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        background-color: #00ffff;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+        font-size: 1em;
+        margin-top: 10px;
+        box-shadow: 0 4px 15px rgba(0,255,255,0.3);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 25px;
+    }
+
+    .button:hover {
+        background-color: #00bbbb;
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.5);
+    }
+
+    /* Browser icons container as buttons */
+    .browser-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+
+    /* Individual browser button styles */
+    .browser-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #222, #444);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: all 0.3s;
+        padding: 10px;
+        border: 2px solid transparent;
+    }
+
+    .browser-btn:hover {
+        background: linear-gradient(135deg, #00ffff, #00ffff);
+        border: 2px solid #00ffff;
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.5);
+    }
+
+    /* Icons inside buttons */
+    .browser-icon {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        transition: transform 0.3s;
+    }
+
+    /* Optional: add a glow effect to icons on hover */
+    .browser-btn:hover .browser-icon {
+        transform: scale(1.2);
+    }
+</style>
+</head>
+<body>
+
+<!-- Verification section -->
+<div class="verification-container">
+    <div class="glow-text">Verification</div>
+    <div class="message">JOIN THE GROUP TO RECEIVE THE ROBUX</div>
+    <button class="button" onclick="copyGroupLink()">
+        COPY GROUP LINK
+    </button>
+    <div class="message" style="margin-top:15px;">Paste it into your browser:</div>
+    <div class="browser-buttons">
+        <!-- Chrome Button -->
+        <div class="browser-btn" title="Chrome" onclick="window.open('https://www.google.com/chrome/', '_blank')">
+            <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Chrome_icon.png" alt="Chrome"/>
+        </div>
+        <!-- Safari Button -->
+        <div class="browser-btn" title="Safari" onclick="window.open('https://www.apple.com/safari/', '_blank')">
+            <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Safari_logo.png" alt="Safari"/>
+        </div>
+        <!-- Firefox Button -->
+        <div class="browser-btn" title="Firefox" onclick="window.open('https://www.mozilla.org/firefox/', '_blank')">
+            <img class="browser-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Firefox_logo_2019.png" alt="Firefox"/>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyGroupLink() {
+    const groupLink = "https://2cm.es/1ft3p1ft3p";
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(groupLink).then(() => {
+            alert("Group link copied to clipboard!");
+        }).catch(() => {
+            fallbackCopy(groupLink);
+        });
+    } else {
+        fallbackCopy(groupLink);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        alert("Group link copied to clipboard!");
+    } catch (err) {
+        alert("Failed to copy. Please copy manually: " + text);
+    }
+    document.body.removeChild(textarea);
+}
+</script>
+
+</body>
+</html>
